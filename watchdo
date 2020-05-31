@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Usage:
+# watchdo <folders> --http <httpie params>
+#
+# Todo:
+# - Support for any command
+
+watch="fswatch -0 -e \"~$\" -r"
+xargs="xargs -0 -I {}";
+
+http="http --style=solarized"
+
+folders=true
+for var in "$@";
+do
+    if [ "${var}" == "--http" ]
+    then
+        folders=false
+    elif [ $folders = true ]
+    then
+        watch="${watch} ${var}"
+    else
+        http="${http} ${var}"
+    fi
+done
+
+eval "${watch} | ${xargs} ${http}"
