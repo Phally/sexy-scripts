@@ -1,14 +1,16 @@
-# Scripts to make dev life bearable [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
+# Sexy scripts to make dev life bearable!
 
-This repository contains scripts for everyday life in macOS / Linux. I'm sure you can get it to work in Windows Bash or Cygwin as well.
+This repository contains scripts for everyday life in macOS / Linux.
+
+I'm sure you can get it to work in Windows Bash or Cygwin as well.
 
 Clone or download this repository and add it to the environment in `~/.zshrc` (for example) using:
 
 ```bash
-export PATH="${PATH}:/Users/phally/Script"
+export PATH="${PATH}:/Users/phally/sexy-scripts"
 ```
 
-## Scripts
+## Scripts you want to use
 
 ### watchdo – run a command on folder or file change
 
@@ -33,7 +35,7 @@ watchdo src -- vendor/bin/phpunit
 # Automatically run a single PHPunit test when you save something:
 watchdo src -- vendor/bin/phpunit tests/TestCase/Controller/UsersControllerTest.php
 
-# Extremely useful for API development!
+# Obviously useful for API development!
 # Watch the source code and do a HTTP request on save (with HTTPie):
 watchdo src -- http GET http://localhost:3000/project/items.json
 
@@ -46,3 +48,5 @@ watchdo folder1 folder2 -- ls -lah {}
 In time I'll probably add more scripts here.
 
 These scripts are designed to be simple. Although I appreciate contributions a lot, issues or pull requests making them more complex might be closed.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
