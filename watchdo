@@ -27,11 +27,18 @@ do
     then
         watch="${watch} ${var}"
     else
-        cmd="${cmd} ${var}"
+        cmd="${cmd}${var} "
     fi
 done
 
-cmd="${watch} | ${xargs} ${cmd}";
+if [ -z "$cmd" ]
+then
+>&2 echo "Usage: watchdo <folder ...> -- <command>"
+>&2 echo "No command to execute."
+exit 1
+fi
+
+cmd="${watch} | ${xargs} ${cmd}"
 echo "Full command: ${cmd}";
 echo
 eval "$cmd"
