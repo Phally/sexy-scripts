@@ -12,6 +12,8 @@ export PATH="${PATH}:/Users/phally/Script"
 
 ### watchdo
 
+Watches given folder(s) and runs a given command when something changes. Does not support aliases as it uses `xargs`.
+
 Requires [`fswatch`](https://github.com/emcrisostomo/fswatch/wiki/How-to-Use-fswatch) which can be installed using Homebrew.
 
 ```bash
