@@ -14,31 +14,36 @@
 # - Ability to pass the excludes also.
 #
 
-watch="fswatch -0 -e \"~$\" -r"
-xargs="xargs -0 -I {}";
+fswatch="fswatch -0 -e \"~$\" -r"
+xargs="xargs -0 -I {}"
 
 folders=true
-for var in "$@";
+
+# Loop through the parameters and construct the
+# different sections of the command.
+for param in "$@"
 do
-    if [ "${var}" == "--" ]
+    if [ "${param}" == "--" ]
     then
         folders=false
     elif [ $folders = true ]
     then
-        watch="${watch} ${var}"
+        fswatch="${fswatch} ${param}"
     else
-        cmd="${cmd}${var} "
+        cmd="${cmd}${param} "
     fi
 done
 
+# Check if there's actually a command to execute.
 if [ -z "$cmd" ]
 then
->&2 echo "Usage: watchdo <folder ...> -- <command>"
->&2 echo "No command to execute."
-exit 1
+    >&2 echo "Usage: watchdo <folder ...> -- <command>"
+    >&2 echo "No command to execute."
+    exit 1
 fi
 
-cmd="${watch} | ${xargs} ${cmd}"
-echo "Full command: ${cmd}";
+# Paste the sections together and execute it.
+cmd="${fswatch} | ${xargs} ${cmd}"
+echo "Full command: ${cmd}"
 echo
 eval "$cmd"
