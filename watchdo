@@ -1,7 +1,18 @@
 #!/bin/bash
 
+#
+# Watches given folder(s) and runs a given command when something changes.
+# Does not support aliases as it uses xargs.
+#
+# Author: Frank de Graaf (Phally)
+# License: MIT
+#
 # Usage:
-# watchdo <folders> -- <command>
+# watchdo <folder ...> -- <command>
+#
+# Maybe later:
+# - Ability to pass the excludes also.
+#
 
 watch="fswatch -0 -e \"~$\" -r"
 xargs="xargs -0 -I {}";
@@ -20,4 +31,7 @@ do
     fi
 done
 
-eval "${watch} | ${xargs} ${cmd}"
+cmd="${watch} | ${xargs} ${cmd}";
+echo "Full command: ${cmd}";
+echo
+eval "$cmd"
